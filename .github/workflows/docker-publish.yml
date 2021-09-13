@@ -15,7 +15,7 @@ on:
 
 env:
   # Use docker.io for Docker Hub if empty
-  REGISTRY: registry.hub.docker.com
+  REGISTRY: registry-1.docker.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: volevanya/nginx
 
