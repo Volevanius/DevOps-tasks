@@ -30,10 +30,9 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
           ssh-host: ${{ secrets.AWS_VM_IP }}
-      - name: Stop ALL running containers
-        run: |
-          ssh ${{ secrets.AWS_VM_USER }}@${{ secrets.AWS_VM_IP }}
-          sudo docker ps -a -q | xargs -n 1 -P 8 -I {} sudo docker stop {}
-          exit
+      - name: SSH to server
+        run: ssh ${{ secrets.AWS_VM_USER }}@${{ secrets.AWS_VM_IP }}
+      - name: Stop ALL docker containers
+        run: sudo docker ps -a -q | xargs -n 1 -P 8 -I {} sudo docker stop {}
       - name: Start NEW container
         run: ssh ${{ secrets.AWS_VM_USER }}@${{ secrets.AWS_VM_IP }} sudo docker run -p 80:80 volevanya/nginx
