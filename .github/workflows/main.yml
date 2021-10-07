@@ -24,6 +24,7 @@ jobs:
           addLatest: true
   run:
     name: Run
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Starting container with new image
