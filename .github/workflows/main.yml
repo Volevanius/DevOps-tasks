@@ -23,16 +23,16 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           addLatest: true
   run:
+    name: Run
     runs-on: ubuntu-latest
     steps:
-      - name: Setup SSH
-        uses: kielabokkie/ssh-key-and-known-hosts-action@v1.2.0
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
         with:
-          ssh-private-key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
-          ssh-host: ${{ secrets.AWS_VM_IP }}
-      - name: SSH to server
-        run: ssh ${{ secrets.AWS_VM_USER }}@${{ secrets.AWS_VM_IP }}
-      - name: Stop ALL docker containers
-        run: sudo docker ps
-      - name: Start NEW container
-        run: ssh ${{ secrets.AWS_VM_USER }}@${{ secrets.AWS_VM_IP }} sudo docker run -p 80:80 volevanya/nginx
+          host: ${{ secrets.AWS_VM_IP }}
+          username: ${{ secrets.AWS_VM_USER }}
+          key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            whoami
+            sudo docker ps
