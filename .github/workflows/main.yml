@@ -35,4 +35,5 @@ jobs:
           port: 22
           script: |
             whoami
-            sudo docker ps
+            docker ps -a -q
+            $(docker ps -a -q)
