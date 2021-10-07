@@ -36,4 +36,5 @@ jobs:
           port: 22
           script: |
             sudo docker stop $(sudo docker ps -a -q)
+            sudo docker rmi -f volevanya/nginx:latest
             sudo docker run -p 80:80 -it -d volevanya/nginx:latest
