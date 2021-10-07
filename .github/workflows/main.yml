@@ -34,5 +34,6 @@ jobs:
         run: |
           ssh ${{ secrets.AWS_VM_USER }}@${{ secrets.AWS_VM_IP }}
           sudo docker ps -a -q | xargs -n 1 -P 8 -I {} sudo docker stop {}
+          exit
       - name: Start NEW container
         run: ssh ${{ secrets.AWS_VM_USER }}@${{ secrets.AWS_VM_IP }} sudo docker run -p 80:80 volevanya/nginx
